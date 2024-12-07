@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .checkout-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .cart-summary {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item span {
+            flex: 1;
+            text-align: left;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #218838;
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+
+        <div id="cart-summary" class="cart-summary">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+
+        <div class="cart-total">
+            Total: $<span id="checkout-total">0.00</span>
+        </div>
+
+        <form id="checkout-form">
+            <h2>Billing Details</h2>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="card">Credit Card Number</label>
+                <input type="text" id="card" name="card" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiration">Expiration Date (MM/YY)</label>
+                <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cvc">CVC</label>
+                <input type="text" id="cvc" name="cvc" required>
+            </div>
+
+            <button type="submit" class="submit-button">Complete Purchase</button>
+        </form>
+
+        <div class="empty-cart" id="empty-cart-message"></div>
+    </div>
+
+    <script>
+        // Load cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartSummaryContainer = document.getElementById('cart-summary');
+        const checkoutTotalElement = document.getElementById('checkout-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+
+        // Render Cart Function
+        function renderCheckout() {
+            cartSummaryContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.innerHTML = '<p>Your cart is empty!</p>';
+                return;
+            } else {
+                emptyCartMessage.innerHTML = '';
+            }
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                cartSummaryContainer.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>${item.quantity} x $${item.price.toFixed(2)}</span>
+                        <span>$${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            checkoutTotalElement.textContent = total.toFixed(2);
+        }
+
+        // Handle form submission
+        const checkoutForm = document.getElementById('checkout-form');
+        checkoutForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(checkoutForm);
+            const customerDetails = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                address: formData.get('address'),
+                card: formData.get('card'),
+                expiration: formData.get('expiration'),
+                cvc: formData.get('cvc')
+            };
+
+            console.log('Customer Details:', customerDetails);
+            console.log('Cart:', cart);
+
+            alert('Purchase completed successfully!');
+            localStorage.removeItem('cart');
+            window.location.href = 'thankyou.html';
+        });
+
+        // Initial render of the checkout
+        renderCheckout();
+    </script>
+
+</body>
+</html>

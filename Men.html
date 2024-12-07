@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Fashion - Exclusive Deals</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-info {
+            margin-bottom: 20px;
+        }
+        .product-images img {
+            width: 150px;
+            margin-right: 5px;
+        }
+        .action-buttons {
+            margin-top: 10px;
+        }
+        .action-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .buy-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exclusive Deals on Amazing Products</h1>
+        <p>Find the best deals for your home, business, and hobbies!</p>
+    </header>
+    
+    <!-- Navigation for Categories -->
+    <nav class="categories">
+        <ul>
+            <li><a href="ArtsCrafts.html">Arts & Crafts</a></li>
+            <li><a href="Men.html">Men</a></li>
+            <li><a href="Women.html">Women</a></li>
+            <li><a href="All.html">All Categories</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+
+    <!-- First Product -->
+    <section class="product">
+        <div class="product-info">
+            <h2>3pcs Solid Drawstring Sports Sweatpants</h2>
+            <p><strong>Price:</strong> $28.79</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>High-quality genuine leather</li>
+                <li>Stylish and comfortable fit</li>
+                <li>Perfect for casual or formal events</li>
+            </ul>
+            <div class="action-buttons">
+                <button onclick="addToCart('3pcs Solid Drawstring Sports Sweatpants', 28.79)">Add to Cart</button>
+                <button onclick="buyNow('https://temu.to/k/up7bk5s6hxz')">Buy Now</button>
+            </div>
+        </div>
+        <div class="product-images">
+            <img src="https://img.kwcdn.com/product/fancy/leather1.jpg?imageView2/2/w/800/q/70/format/webp" alt="Men's Leather Jacket Image 1">
+            <img src="https://img.kwcdn.com/product/fancy/leather2.jpg?imageView2/2/w/800/q/70/format/webp" alt="Men's Leather Jacket Image 2">
+            <img src="https://img.kwcdn.com/product/fancy/leather3.jpg?imageView2/2/w/800/q/70/format/webp" alt="Men's Leather Jacket Image 3">
+            <img src="https://img.kwcdn.com/product/fancy/leather4.jpg?imageView2/2/w/800/q/70/format/webp" alt="Men's Leather Jacket Image 4">
+        </div>
+    </section>
+
+    <!-- Second Product -->
+    <section class="product">
+        <div class="product-info">
+            <h2>Classic Aviator Sunglasses</h2>
+            <p><strong>Price:</strong> $25.99</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Polarized lenses for better clarity</li>
+                <li>Durable and lightweight design</li>
+                <li>Perfect for outdoor activities</li>
+            </ul>
+            <div class="action-buttons">
+                <button onclick="addToCart('Classic Aviator Sunglasses', 25.99)">Add to Cart</button>
+                <button onclick="buyNow('https://temu.to/k/up7bk5s6hxz')">Buy Now</button>
+            </div>
+        </div>
+        <div class="product-images">
+            <img src="https://img.kwcdn.com/product/fancy/sunglasses1.jpg?imageView2/2/w/800/q/70/format/webp" alt="Aviator Sunglasses Image 1">
+            <img src="https://img.kwcdn.com/product/fancy/sunglasses2.jpg?imageView2/2/w/800/q/70/format/webp" alt="Aviator Sunglasses Image 2">
+            <img src="https://img.kwcdn.com/product/fancy/sunglasses3.jpg?imageView2/2/w/800/q/70/format/webp" alt="Aviator Sunglasses Image 3">
+            <img src="https://img.kwcdn.com/product/fancy/sunglasses4.jpg?imageView2/2/w/800/q/70/format/webp" alt="Aviator Sunglasses Image 4">
+        </div>
+    </section>
+
+    <script>
+        // Add to Cart Function
+        function addToCart(productName, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({ name: productName, price: price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName} has been added to your cart!`);
+        }
+
+        // Buy Now Function
+        function buyNow(link) {
+            window.location.href = link;
+        }
+    </script>
+</body>
+</html>

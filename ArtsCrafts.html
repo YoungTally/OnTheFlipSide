@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arts & Crafts - Exclusive Deals</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-info {
+            margin-bottom: 20px;
+        }
+        .product-images img {
+            width: 150px;
+            margin-right: 5px;
+        }
+        .action-buttons {
+            margin-top: 10px;
+        }
+        .action-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .buy-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exclusive Deals on Amazing Products</h1>
+        <p>Find the best deals for your home, business, and hobbies!</p>
+    </header>
+    
+    <!-- Navigation for Categories -->
+    <nav class="categories">
+        <ul>
+            <li><a href="ArtsCrafts.html">Arts & Crafts</a></li>
+            <li><a href="Men.html">Men</a></li>
+            <li><a href="Women.html">Women</a></li>
+            <li><a href="All.html">All Categories</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+
+    <!-- First Product -->
+    <section class="product">
+        <div class="product-info">
+            <h2>Portable Thermal Printer M08F</h2>
+            <p><strong>Price:</strong> $64.24 🎉</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>8.5x11 inch Ink-Free Mobile Printing Solution</li>
+                <li>Compatible with Android and iOS Devices</li>
+                <li>Wireless and Compact Design for Easy On-the-Go Printing</li>
+            </ul>
+            <button onclick="addToCart('Portable Thermal Printer M08F', 64.24)">Add to Cart</button>
+            <a href="https://temu.to/k/ut6l0uu4105" target="_blank" class="buy-button">Buy Now</a>
+        </div>
+        <div class="product-images">
+            <img src="https://img.kwcdn.com/product/fancy/6d10625d-751d-4282-b738-0d6388f8739d.jpg?imageView2/2/w/800/q/70/format/webp" alt="Portable Thermal Printer Image 1">
+            <img src="https://img.kwcdn.com/product/fancy/5143ddc5-7517-4a6d-99dd-fbde98648ec5.jpg?imageView2/2/w/800/q/70/format/webp" alt="Portable Thermal Printer Image 2">
+            <img src="https://img.kwcdn.com/product/1eed5128b0/8d49bf6e-9677-4012-a76b-b91bc1d22a12_800x800.jpeg?imageView2/2/w/800/q/70/format/webp" alt="Portable Thermal Printer Image 3">
+            <img src="https://img.kwcdn.com/product/fancy/0b9b6df1-a7e8-4615-ab3d-5815095192cc.jpg?imageView2/2/w/800/q/70/format/webp" alt="Portable Thermal Printer Image 4">
+        </div>
+    </section>
+
+    <!-- Second Product -->
+    <section class="product">
+        <div class="product-info">
+            <h2>Faux Leather Craft Kit</h2>
+            <p><strong>Price:</strong> $29.99</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Complete Kit for Leather Crafting</li>
+                <li>Includes Faux Leather, Needles, Threads, and Instructions</li>
+                <li>Perfect for Beginners and Crafters</li>
+            </ul>
+            <button onclick="addToCart('Faux Leather Craft Kit', 29.99)">Add to Cart</button>
+            <a href="https://temu.to/k/xyz123" target="_blank" class="buy-button">Buy Now</a>
+        </div>
+        <div class="product-images">
+            <img src="https://img.kwcdn.com/product/fancy/sample1.jpg?imageView2/2/w/800/q/70/format/webp" alt="Faux Leather Craft Kit Image 1">
+            <img src="https://img.kwcdn.com/product/fancy/sample2.jpg?imageView2/2/w/800/q/70/format/webp" alt="Faux Leather Craft Kit Image 2">
+        </div>
+    </section>
+
+    <!-- Third Product -->
+    <section class="product">
+        <div class="product-info">
+            <h2>DIY Candle Making Kit</h2>
+            <p><strong>Price:</strong> $39.99</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Complete Kit to Create Beautiful Candles</li>
+                <li>Includes Wax, Wicks, Molds, and Dyes</li>
+                <li>Perfect for Home Decor or Gifts</li>
+            </ul>
+            <button onclick="addToCart('DIY Candle Making Kit', 39.99)">Add to Cart</button>
+            <a href="https://temu.to/k/candlekit" target="_blank" class="buy-button">Buy Now</a>
+        </div>
+        <div class="product-images">
+            <img src="https://img.kwcdn.com/product/fancy/sample5.jpg?imageView2/2/w/800/q/70/format/webp" alt="Candle Making Kit Image 1">
+            <img src="https://img.kwcdn.com/product/fancy/sample6.jpg?imageView2/2/w/800/q/70/format/webp" alt="Candle Making Kit Image 2">
+        </div>
+    </section>
+
+    <script>
+        // Add to Cart Function
+        function addToCart(productName, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.name === productName);
+
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({ name: productName, price: price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName} has been added to your cart!`);
+        }
+    </script>
+</body>
+</html>
